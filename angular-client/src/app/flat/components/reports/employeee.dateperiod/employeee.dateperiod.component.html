@@ -1,0 +1,52 @@
+<dx-popup class="popup popup-form"
+          [width]="400"
+          [height]="'auto'"
+          [dragEnabled]="true"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisible">
+  <div class="row confirm-popup text-center">
+    <div class="col-12">
+      <div class="text-left m-0 p-0 mb-1">
+        <p class="m-0 p-0">сотрудник:</p>
+      </div>
+      <div>
+        <dx-select-box #listEmoloyers
+                       [showClearButton]="true"
+                       [items]="EmployersList"
+                       placeholder=""
+                       searchEnabled="true"
+                       displayExpr="fullName"
+                       valueExpr="id"
+                       [(ngModel)]="employee">
+
+        </dx-select-box>
+      </div>
+      <div class="mt-3">
+        <div class="d-inline-block align-middle">с</div>
+        <div class="d-inline-block ml-2 align-middle" style="width:120px;">
+          <dx-date-box type="date"
+                       displayFormat="dd.MM.yyyy"
+                       [(value)]="filter.dfrom">
+            <dxi-validation-rule type="required"
+                                 message="Поле обязательно для заполнения">
+            </dxi-validation-rule>
+          </dx-date-box>
+        </div>
+        <div class="d-inline-block ml-2 align-middle">по</div>
+        <div class="d-inline-block ml-2 align-middle" style="width:120px;">
+          <dx-date-box type="date"
+                       displayFormat="dd.MM.yyyy"
+                       [(value)]="filter.dto">
+            <dxi-validation-rule type="required"
+                                 message="Поле обязательно для заполнения">
+            </dxi-validation-rule>
+          </dx-date-box>
+
+        </div>
+      </div>
+      <div class="mt-5">
+        <button [disabled]="!employee || !filter.dto || !filter.dfrom  ? 'disabled': ''"  class="btn btn-warning" style="width:200px" (click)="closePopup()">Сформировать</button>
+      </div>
+    </div>
+  </div>
+</dx-popup>

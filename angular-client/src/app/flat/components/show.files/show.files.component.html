@@ -1,0 +1,17 @@
+<confirm-edit-form #confirm></confirm-edit-form>
+<info-form #infoform></info-form>
+<div>
+  <div class="mt-2" style="height:65px;">
+    <div *ngIf="!isReadOnly" class="upload-btn-wrapper btn btn-outline-primary ml-3 mt-2 mb-2 cursor-pointer">
+      Добавить файл
+      <input type="file" name="myfile" (change)="handleFileInput($event.target.files)" />
+    </div>
+    <div *ngIf="isReadOnly">&nbsp;</div>
+    <button *ngIf="isInformation && isShowSend && !isReadOnly"  class="btn btn-outline-primary ml-2" (click)="SendInstruction()">Отправить предписание</button>
+  </div>
+  <div class="border text-left ml-3 mr-3" style="overflow-y:auto;height:460px;">
+    <div *ngIf="orderid && orderid > 0" class="files">
+      <file-item *ngFor='let file of fileList' [(file)]="file" [(infoform)]="tinfoform"  [(isInformation)]="InformationMode" [(isReadOnly)]="isReadOnly" (onCheckChanged)="onCheckChanged()"  (onRefresh)="refresfFiles()" ></file-item>
+    </div>
+  </div>
+</div>

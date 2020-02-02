@@ -1,0 +1,259 @@
+<info-form #infoform></info-form>
+<dx-popup
+         
+          class="popup"
+          [width]="600"
+          [height]="700"
+          [showTitle]="true"
+          [title]="title"
+          [dragEnabled]="true"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisible">
+
+
+  <div>
+    <div>
+      <dx-tab-panel #tabPanel
+                    [selectedIndex]="0"
+                    [height]="610"
+                    [dataSource]="tabPanelItems"
+                    [loop]="false"
+                    [animationEnabled]="false"
+                    [swipeEnabled]="false">
+
+        <div *dxTemplate="let t of 'title'">
+          {{t.title}}
+        </div>
+        <div *dxTemplate="let t of 'item'">
+          <div *ngIf="tabPanel.selectedIndex == 0">
+            <div *ngIf="order" class="p-2">
+
+              <dx-validation-group #validationGroupVar id="clientValidationGroup">
+                <div class="row mt-2">
+                  <div class="col-12">
+
+                    <div class="dx-field">
+                      <div class="dx-field-label pt-2" style="width:30%!important">Проверка</div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <div class="row mt-2">
+
+                          <div class="col-6">
+                            <span class="align-middle">c</span>
+                            <div class="ml-2 align-middle" style="display:inline-block; width:120px;">
+                              <dx-date-box type="time" [(value)]="order.dBegin" [readOnly]="!isNew || !this.isSavable || isDateFact">
+                                <dx-validator>
+                                  <dxi-validation-rule type="required"
+                                                       message="Поле обязательно для заполнения">
+                                  </dxi-validation-rule>
+                                </dx-validator>
+                              </dx-date-box>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <span class="align-middle">по</span>
+                            <div class="ml-2 align-middle" style="display:inline-block; width:120px;">
+                              <dx-date-box type="time" [(value)]="order.dEnd" [readOnly]="!this.isSavable || isDateFact">
+                                <dx-validator>
+                                  <dxi-validation-rule type="required"
+                                                       message="Поле обязательно для заполнения">
+                                  </dxi-validation-rule>
+                                </dx-validator>
+                              </dx-date-box>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <div class="dx-field">
+                    <div class="dx-field-label" style="width:30%!important">Объект</div>
+                    <div class="dx-field-value" style="width:70%!important">
+                      <dx-select-box [items]="arLocations"
+                                     placeholder=""
+                                     displayExpr="name"
+                                     valueExpr="id"
+                                     [readOnly]="!this.isSavable || isDateFact"
+                                     [(ngModel)]="order.buildObject">
+
+
+                      </dx-select-box>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div class="dx-field">
+                      <div class="dx-field-label" style="width:30%!important">Место</div>
+                      <div class="dx-field-value" style="width:70%!important">
+
+                        <dx-text-box [showClearButton]="true" [(value)]="order.location" [readOnly]="!this.isSavable || isDateFact">
+                          <dx-validator>
+                            <dxi-validation-rule type="required"
+                                                 message="Поле обязательно для заполнения">
+                            </dxi-validation-rule>
+                          </dx-validator>
+                        </dx-text-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div class="dx-field">
+                      <div class="dx-field-label" style="width:30%!important">Виды работ</div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <dx-text-box [showClearButton]="true" [(value)]="order.workType" [readOnly]="!this.isSavable || isDateFact">
+                          <dxi-validation-rule type="required"
+                                               message="Поле обязательно для заполнения">
+                          </dxi-validation-rule>
+                        </dx-text-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div class="dx-field">
+                      <div class="dx-field-label" style="width:30%!important">Подрядчик</div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <dx-select-box #contragentsList [dataSource]="contragents"
+                                       placeholder=""
+                                       searchEnabled="true"
+                                       displayExpr="name"
+                                       valueExpr="name"
+                                       [readOnly]="!this.isSavable || isDateFact"
+                                       [(ngModel)]="order.contractor"
+                                       [showClearButton]="true"
+                                       acceptCustomValue="true"
+                                       (onKeyUp)="valuecghngedS($event)">
+
+
+                        </dx-select-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div class="dx-field">
+                      <div class="dx-field-label" style="width:30%!important">Сотрудник ОНОР:</div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <dx-text-box [showClearButton]="true" [(value)]="order.employee" [readOnly]="true">
+                          <dxi-validation-rule type="required"
+                                               message="Поле обязательно для заполнения">
+                          </dxi-validation-rule>
+                        </dx-text-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12" >
+                    <div class="dx-field">
+                      <div class="dx-field-label" style="width:30%!important">Результат:</div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <dx-select-box [items]="arResults"
+                                       placeholder=""
+                                       displayExpr="name"
+                                       valueExpr="id"
+                                       [readOnly]="isNew || !this.isSavable"
+                                       [(ngModel)]="order.result"
+                                       (onValueChanged)="valuecghnged($event)">
+
+                        </dx-select-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div  class="dx-field" >
+                      <div class="dx-field-label" style="width:30%!important">
+                        <span *ngIf="isNuberRemark">Управляющий:</span>
+                      </div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <dx-select-box #heads
+                                       [showClearButton]="true"
+                                       [items]="headsRecords"
+                                       [visible]="isNuberRemark"
+                                       placeholder=""
+                                       displayExpr="name"
+                                       valueExpr="id"
+                                       [readOnly]="!this.isSavable"
+                                       [(ngModel)]="order.head"
+                                      >
+
+                        </dx-select-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div class="dx-field">
+                      <div class="dx-field-label" style="width:30%!important">Примечание:</div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <dx-text-box [visible]="!isNuberRemark" [showClearButton]="true" [(value)]="order.remark" [readOnly]="isNew || !this.isSavable || isNoRemark"></dx-text-box>
+                        <dx-number-box format="#0" [(value)]="order.remark" [readOnly]="isNew || !this.isSavable || isNoRemark" [visible]="isNuberRemark"></dx-number-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div class="dx-field">
+                      <div class="dx-field-label" style="width:30%!important">Дата устранения:</div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <dx-date-box type="date"
+                                     displayFormat="dd.MM.yyyy"
+                                     invalidDateMessage="Формат даты: dd.MM.yyyy"
+                                     [(value)]="order.repare"
+                                     [readOnly]="!this.isSavable || order.repareFakt">
+                          <dxi-validation-rule type="required"
+                                               message="Поле обязательно для заполнения">
+                          </dxi-validation-rule>
+                        </dx-date-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <div class="dx-field">
+                      <div class="dx-field-label" style="width:30%!important;word-wrap: break-word;">Дата устранения факт:</div>
+                      <div class="dx-field-value" style="width:70%!important">
+                        <dx-date-box type="date"
+                                     displayFormat="dd.MM.yyyy"
+                                     invalidDateMessage="Формат даты: dd.MM.yyyy"
+                                     [readOnly]="isNew || !this.isSavable || isNoRemark"
+                                     [(value)]="order.repareFakt">
+
+                        </dx-date-box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-12 text-right">
+                    <button *ngIf="isSavable" class="btn btn-primary p-2 btn-dialog pl-3 pr-3" (click)="saveData()">Сохранить</button>
+                    <button class="btn btn-primary p-2 btn-dialog pl-3 pr-3 ml-1" (click)="popupVisible=false">Отмена</button>
+                  </div>
+                </div>
+              </dx-validation-group>
+            </div>
+
+          </div>
+          <div *ngIf="tabPanel.selectedIndex == 1">
+            <div *ngIf="order">
+              <show-files [isReadOnly]="!this.isSavable" [isInformation]="this.isNuberRemark" [orderid]="order.id"></show-files>
+            </div>
+          </div>
+        </div>
+      </dx-tab-panel>
+    </div>
+  </div>
+</dx-popup>

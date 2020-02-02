@@ -1,0 +1,18 @@
+.file-item {
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+  width: 70px;
+  word-wrap: break-word;
+  vertical-align: top;
+  color: #000;
+}
+
+
+  .file-item:hover {
+    color: #0094ff;
+  }
+
+.checked {
+  color: #087c0b;
+}

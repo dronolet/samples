@@ -1,0 +1,12 @@
+<confirm-edit-form #confirmitem></confirm-edit-form>
+<div class="text-center cursor-pointer position-relative file-item">
+  <div *ngIf="!isReadOnly" class="position-absolute border" style="top:0;right:0; width:20px;height:20px;display:block;background-color:#fff;z-index:100;color:#ff0000;" [attr.data-fileid]="file.id" (click)="deleteElementFile($event)"> X </div>
+  <i *ngIf="isInformation && isChecked && !isReadOnly" class="fa fa-envelope-open-o position-absolute p-1" style="top:30px;left:0;z-index:100;background-color:#fff;font-size:2rem;" aria-hidden="true" [ngClass]="{checked:isChecked}" (click)="Checked()"></i>
+  <i *ngIf="isInformation && !isChecked && !isReadOnly" class="fa fa-envelope-o position-absolute p-1" style="top:32px;left:0;z-index:100;background-color:#fff;font-size:2rem;" aria-hidden="true" (click)="Checked()"></i>
+  
+  <span class="d-block" (click)="downloadFile(file.id)">
+    <img src="/assets/file.png" alt=" " style="width:50px;" />
+  </span>
+  {{file.fileName}}
+
+</div>

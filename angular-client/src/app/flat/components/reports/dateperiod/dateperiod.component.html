@@ -1,0 +1,38 @@
+<dx-popup class="popup popup-form"
+          [width]="400"
+          [height]="'auto'"
+          [dragEnabled]="true"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisible">
+
+  <div class="row confirm-popup text-center">
+    <div class="col-12">
+      <div>
+        <div class="d-inline-block align-middle">с</div>
+        <div class="d-inline-block ml-2 align-middle" style="width:120px;">
+          <dx-date-box type="date"
+                       displayFormat="dd.MM.yyyy"
+                       [(value)]="filter.dfrom">
+            <dxi-validation-rule type="required"
+                                 message="Поле обязательно для заполнения">
+            </dxi-validation-rule>
+          </dx-date-box>
+        </div>
+        <div class="d-inline-block ml-2 align-middle">по</div>
+        <div class="d-inline-block ml-2 align-middle" style="width:120px;">
+          <dx-date-box type="date"
+                       displayFormat="dd.MM.yyyy"
+                       [(value)]="filter.dto">
+            <dxi-validation-rule type="required"
+                                 message="Поле обязательно для заполнения">
+            </dxi-validation-rule>
+          </dx-date-box>
+          
+        </div>
+      </div>
+      <div class="mt-5">
+        <button [disabled]="!filter.dto || !filter.dfrom  ? 'disabled': ''" class="btn btn-warning" style="width:200px" (click)="closePopup()">Сформировать</button>
+      </div>
+    </div>
+  </div>
+</dx-popup>

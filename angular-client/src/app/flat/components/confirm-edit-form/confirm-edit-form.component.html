@@ -1,0 +1,17 @@
+﻿<dx-popup class="popup popup-form"
+          [width]="400"
+          [height]="'auto'"
+          [dragEnabled]="true"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisible">
+
+  <div class="row confirm-popup text-center">
+   <div class="col-12">
+      <p class="info-text">{{infotext}}</p>
+      <div class="mt-5">
+        <button class="btn btn-warning" (click)="yesAction()">Да</button>
+        <button class="btn btn-warning ml-2" (click)="closePopup()">Отмена</button>
+      </div>
+    </div>
+  </div>
+</dx-popup>

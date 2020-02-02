@@ -1,0 +1,96 @@
+:host {
+  background-color: #D1E7FD;
+}
+
+::ng-deep .dx-datagrid {
+  font: 10px verdana;
+}
+
+
+::ng-deep .dx-datagrid-headers {
+  border: 1px solid #bdb8b8 !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+  background-color: #5094B7;
+}
+
+.warning {
+  background-color: rgba(255,230,230,0.6);
+}
+
+.check-style {
+  font-size:1.5rem!important;
+
+}
+
+
+::ng-deep .dx-header-row {
+  color: #fff;
+}
+
+::ng-deep .dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content {
+  white-space: normal!important;
+}
+
+::ng-deep .header-top {
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  width: 98% !important;
+  min-width: 800px !important;
+  max-width: 1400px !important;
+}
+
+.page-header {
+  text-align:left;
+}
+
+.block-input {
+   display:inline-block!important;
+   width: 150px;
+}
+
+.align-middle {
+  vertical-align:middle!important;
+}
+
+.pl-10 {
+  padding-left:10px;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.filter-part-block {
+  display: inline-block;
+  padding:5px;
+}
+
+.filter-input {
+  width: 150px;
+  display: inline-block;
+}
+
+.text-left {
+  text-align:left;
+}
+
+
+.text-right {
+  text-align: right;
+}
+
+
+
+
+
+

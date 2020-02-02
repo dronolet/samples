@@ -1,0 +1,29 @@
+
+<div class="height-100">
+  <div style="position:fixed;top:40px;width:100%;">
+    <h2>Замечания ОНОР</h2>
+  </div>
+  <div class="flex-block" >
+    <form #loginForm="ngForm" novalidate class="auth-block text-center p-3" (ngSubmit)="onSubmit(loginForm)">
+      <img src="/assets/l1.png" height="70" calss="mb-3" />
+
+
+      <div class="mt-5 text-left">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>email</label>
+              <input type="text" name="email" ngModel required class="form-control pass-input" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col text-center">
+            <button class="btn btn-outline-primary" [disabled]="loginForm.invalid">Получить пароль</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

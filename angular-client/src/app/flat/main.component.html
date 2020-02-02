@@ -1,0 +1,157 @@
+<edit-form-main #editform (onChanged)="refreshData()"></edit-form-main>
+<date-period #dateperiod (OnApply)="OnApplyDatePeriod($event)"></date-period>
+<info-form #infoform></info-form>
+<employeee-dateperiod #dateemploee (OnApply)="OnApplyemploeeDatePeriod($event)"></employeee-dateperiod>
+<div class="mt-3">
+  <div class="position-relative">
+    <div class="text-center p-0 m-0">
+      <h3>Список замечаний ОНОР</h3>
+    </div>
+    <div *ngIf="userinfo.isRevisor == 1" class="position-absolute dropdown" style="left:0;top:0;">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Отчеты&nbsp;&nbsp;&nbsp;
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let report of reportsList" class="dropdown-item cursor-pointer" (click)="OnReport(report.id)">{{report.name}}</a>
+      </div>
+    </div>
+    <div class="position-absolute" style="right:0;top:0;">
+      <div class="d-inline">
+        <div class="d-inline p-3" style="background-color:#E7E7E7!important;">{{userinfo.shrtName}}</div><div class="p-3 d-inline cursor-pointer" style="background-color:#F8F8F8" (click)="logOut()">Выход</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="m-0 mt-5 text-left position-relative p-1 pl-2" style="background-color:#EAF3FC;">
+    <div class="p-2">
+      <div>
+        <div class="d-inline-block align-middle">с</div>
+        <div class="d-inline-block ml-2 align-middle" style="width:200px;">
+          <dx-date-box
+           type="date"
+           displayFormat="dd.MM.yyyy"
+           [(value)]="filter.from">
+          </dx-date-box>
+        </div>
+        <div class="d-inline-block ml-2 align-middle">по</div>
+        <div class="d-inline-block ml-2 align-middle" style="width:200px;">
+          <dx-date-box
+           type="date"
+           displayFormat="dd.MM.yyyy"
+           [(value)]="filter.to"
+           ></dx-date-box>
+        </div>
+      </div>
+      <div class="text-left position-relative mt-3">
+        <div style="height:45px;">
+          <button *ngIf="userinfo.isHead == 0 && userinfo.isRevisor == 0" class="btn btn-primary btn-dialog p-2 pl-3 pr-3 align-middle" (click)="addNew()">Добавить запись</button>
+          
+        </div>
+
+        <div class="position-absolute" style="right:0;top:0;">
+          <button class="btn btn-primary btn-dialog align-middle cursor-pointer mr-3" (click)="getReport()">Excel</button>
+          <button class="btn btn-primary btn-dialog align-middle cursor-pointer" (click)="doSearch()">Найти</button>
+        </div>
+      </div>      
+    </div>
+    <div  class="p-1 position-absolute" style="right:5px;top:7px;">
+      <span class="align-middle">Сроки</span>
+      <i *ngIf="filter.isOverdue" class="fa fa-check-square-o check-style align-middle ml-2 pt-1 cursor-pointer" aria-hidden="true" (click)="setisOverdue()"></i>
+      <i *ngIf="!filter.isOverdue" class="fa fa-square-o check-style align-middle ml-2 pt-1 cursor-pointer" aria-hidden="true" (click)="setisOverdue()"></i>
+    </div>
+  </div>
+  <div class="mt-3 mb-5">
+    <dx-data-grid #grid id="gridContainer"
+                  [dataSource]="dataSource"
+                  [width]="'100%'"
+                  keyExpr="id"
+                  [showBorders]="true"
+                  [hoverStateEnabled]="true"
+                  [columnAutoWidth]="true"
+                  [allowColumnReordering]="false"
+                  [wordWrapEnabled]="true"
+                  rowTemplate="rowTemplateName"
+                  
+                  (onOptionChanged)="onOptionChanged($event)"
+                  >
+      
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxi-column dataField="id" caption="№" [visible]="false" alignment="center" [width]="90"  cellTemplate="cellCenter"></dxi-column>
+      <dxi-column dataField="dBegin" caption="Дата" alignment="center" [width]="90"   cellTemplate="cellDate" ></dxi-column>
+      <dxi-column dataField="timeInterval" caption="Временной инт. пров." [width]="110" alignment="center" cellTemplate="cellCenter"></dxi-column>
+      <dxi-column dataField="buildObjectName" caption="Объект" alignment="center"  [width]="120" cellTemplate="cellName"></dxi-column>
+      <dxi-column dataField="location" caption="Место"   alignment="center" [width]="140" cellTemplate="cellName"></dxi-column>
+      <dxi-column dataField="workType" caption="Вид работ" [visible]="false" [width]="120" alignment="center"  cellTemplate="cellName"></dxi-column>
+      <dxi-column dataField="contractor" caption="Подрядчик" alignment="center"   cellTemplate="cellName"></dxi-column>
+      <dxi-column dataField="employee" caption="Сотрудник ОНОР" alignment="center" [width]="140" cellTemplate="cellName"></dxi-column>
+      <dxi-column dataField="resultCaption" caption="Результат" alignment="center" [width]="90"  cellTemplate="cellName"></dxi-column>
+      <dxi-column dataField="remark" caption="Примечание" [visible]="false" alignment="center" [width]="90"  cellTemplate="cellName"></dxi-column>
+      <dxi-column dataField="repare" caption="Дата устранения" alignment="center" [width]="90"  cellTemplate="cellDate"></dxi-column>
+      <dxi-column dataField="repareFakt" caption="Дата устр. факт."  alignment="center" [width]="75" cellTemplate="cellDate"></dxi-column>
+
+      <tbody class="employee dx-row" *dxTemplate="let order of 'rowTemplateName'">
+        <tr class="border-top" [ngClass]="{'warning': order.data.isOverTime == 1}">
+          <td  title="{{order.data.dBegin | date: 'dd.MM.yyyy'}}"><strong>{{order.data.dBegin | date: 'dd.MM.yyyy'}}</strong></td>
+          <td title="{{order.data.timeInterval}}"><strong>{{order.data.timeInterval}}</strong></td>
+          <td title="{{order.data.buildObjectName}}">{{order.data.buildObjectName}}</td>
+          <td title="{{order.data.location}}">{{order.data.location}}</td>
+          <td class="text-left" title="{{order.data.contractor}}">{{order.data.contractor}}</td>
+          <td title="{{order.data.employee}}">{{order.data.employee}}</td>
+          <td title="{{order.data.resultCaption}}"><strong>{{order.data.resultCaption}}</strong></td>
+          <td title="{{order.data.repare | date: 'dd.MM.yyyy'}}"><strong>{{order.data.repare | date: 'dd.MM.yyyy'}}</strong></td>
+          <td title="{{order.data.repareFakt | date: 'dd.MM.yyyy'}}">
+            <span *ngIf="order.data.repareFakt"><strong>{{order.data.repareFakt | date: 'dd.MM.yyyy'}}</strong></span>
+            <span *ngIf="!order.data.repareFakt">-</span>
+          </td>
+        </tr>
+        <tr class="notes-row" [ngClass]="{'warning': order.data.isOverTime == 1}">
+          <td colspan="7" class="text-left" >
+            <div><b>Вид работ:</b>&nbsp;{{order.data.workType}}</div>
+            <div><b>Примечание:</b>&nbsp;{{order.data.remark}}</div>
+          </td>
+          <td colspan="2" class="text-right">
+            <button *ngIf="order.data.canEdit == 1" class="btn btn-outline-success cursor-pointer p-0" style="width:60px" (click)="editClick(order)">Ред.</button>
+            <button *ngIf="order.data.canEdit != 1" class="btn btn-outline-success cursor-pointer p-0" style="width:60px" (click)="editClick(order)">Вид.</button>
+            <button *ngIf="order.data.canEdit == 1" class="btn btn-outline-danger cursor-pointer p-0 ml-2" style="width:60px" (click)="deleteClick(order)">Уд.</button>
+          </td>
+        </tr>
+      </tbody>
+
+
+      <div *dxTemplate="let d of 'diffCellTemplate'">
+        <button class="btn btn-outline-success cursor-pointer p-0" style="width:70px" (click)="editClick(d)">'Ред.'</button>
+        <button *ngIf="d.data.canEdit == 1" class="btn btn-outline-danger cursor-pointer p-0 ml-2" style="width:70px" (click)="deleteClick(d)">Уд.</button>
+      </div>
+
+
+      <div *dxTemplate="let info of 'cellCenter'">
+        <div style="text-align:center;" title="{{info.value}}">{{info.value}}</div>
+      </div>
+
+      <div *dxTemplate="let info of 'cellName'">
+        <div style="text-align:left;" title="{{info.value}}">{{info.value}}</div>
+      </div>
+
+      <div *dxTemplate="let info of 'cellDate'">
+        <div style="text-align:center" title="{{info.value | date: 'dd.MM.yyyy'}}">{{info.value | date: 'dd.MM.yyyy'}}</div>
+      </div>
+
+      <div *dxTemplate="let info of 'cellPrice'">
+        <div style="text-align:right" title="{{info.value | date: 'dd.MM.yyyy'}}">{{info.value | number:'1.2'}}</div>
+      </div>
+
+      <div *dxTemplate="let info of 'cellNumber'">
+        <div style="text-align:center" title="{{info.value | number:'1.2'}}">{{info.value | number:'1.2'}}</div>
+      </div>
+
+
+      <dxo-paging [pageSize]="20" [pageIndex]="pageIndex"></dxo-paging>
+    </dx-data-grid>
+  </div>
+  
+</div>
+<div class="mt-5 mb-3 p-2 text-center">
+  Замечания ОНОР &copy;2019
+</div>

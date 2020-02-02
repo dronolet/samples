@@ -1,0 +1,16 @@
+<dx-popup class="popup popup-form"
+          [width]="400"
+          [height]="'auto'"
+          [dragEnabled]="true"
+          [closeOnOutsideClick]="true"
+          [(visible)]="popupVisible">
+
+  <div class="row confirm-popup text-center">
+   <div class="col-12">
+      <p class="info-text">{{infotext}}</p>
+      <div class="mt-5">
+        <button class="btn btn-warning" (click)="closePopup()">Ок</button>
+      </div>
+    </div>
+  </div>
+</dx-popup>

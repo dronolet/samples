@@ -1,0 +1,12 @@
+.auth-block {
+  width: 350px;
+  background-color: #D1E7FD;
+  -webkit-box-shadow: 3px -9px 48px -31px rgba(0,0,0,0.88);
+  -moz-box-shadow: 3px -9px 48px -31px rgba(0,0,0,0.88);
+  box-shadow: 3px -9px 48px -31px rgba(0,0,0,0.88)
+}
+
+
+  .auth-block label, h1 {
+    color: #084483 !important;
+  }
