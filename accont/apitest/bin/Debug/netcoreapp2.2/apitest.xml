@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>apitest</name>
+    </assembly>
+    <members>
+        <member name="T:apitest.Classes.MapHelper">
+            <summary>
+            AutoMapper моделей
+            </summary>
+        </member>
+        <member name="M:apitest.Controllers.accountController.GetAcountHistory(System.Int32,apitest.Interfaces.IResultStatus)">
+            <summary>
+            Получения полного списка операций по счет
+            </summary>   
+            <param name="account_id">Идентификатор счета</param>
+            <response code="200">если операция успешна или произошла ошибка в бизнес-логике(например баланс может стать отрицательным, тогда status =”error”)</response>   
+            <response code="400">если параметры не верны(например отрицательный параметр amount)</response>   
+            <response code="404">если сущность не найдена</response>     
+            <response code="500">в случае внутренних ошибок(например проблемы с доступом к серверу БД и т.п.)</response> 
+        </member>
+        <member name="M:apitest.Controllers.accountController.TopUpAcount(System.Int32,System.Decimal,apitest.Interfaces.IResultStatus)">
+            <summary>
+            Внесение денег на счет
+            </summary>   
+            <param name="account_id">Идентификатор счета</param>
+            <param name="amount">Сумма</param>
+            <response code="200">если операция успешна или произошла ошибка в бизнес-логике(например баланс может стать отрицательным, тогда status =”error”)</response>   
+            <response code="400">если параметры не верны(например отрицательный параметр amount)</response>   
+            <response code="404">если сущность не найдена</response>     
+            <response code="500">в случае внутренних ошибок(например проблемы с доступом к серверу БД и т.п.)</response>  
+        </member>
+        <member name="M:apitest.Controllers.accountController.WithdrawAcount(System.Int32,System.Decimal,apitest.Interfaces.IResultStatus)">
+            <summary>
+            Снятие денег со счета
+            </summary>   
+            <param name="account_id">Идентификатор счета</param>
+            <param name="amount">Сумма</param>
+            <response code="200">если операция успешна или произошла ошибка в бизнес-логике(например баланс может стать отрицательным, тогда status =”error”)</response>   
+            <response code="400">если параметры не верны(например отрицательный параметр amount)</response>   
+            <response code="404">если сущность не найдена</response>     
+            <response code="500">в случае внутренних ошибок(например проблемы с доступом к серверу БД и т.п.)</response>     
+        </member>
+        <member name="M:apitest.Controllers.accountController.TransferAcount(System.Int32,System.Int32,System.Decimal,apitest.Interfaces.IResultStatus)">
+            <summary>
+            Перемещение денег между счетами
+            </summary>   
+            <param name="source_account_id">Идентификатор счета</param>
+            <param name="destination_account_id">Идентификатор счета</param>
+            <param name="amount">Сумма</param>
+            <response code="200">если операция успешна или произошла ошибка в бизнес-логике(например баланс может стать отрицательным, тогда status =”error”)</response>   
+            <response code="400">если параметры не верны(например отрицательный параметр amount)</response>   
+            <response code="404">если сущность не найдена</response>     
+            <response code="500">в случае внутренних ошибок(например проблемы с доступом к серверу БД и т.п.)</response>    
+        </member>
+        <member name="T:apitest.Modules.DBCommonContext">
+            <summary>
+            Контекст взаимодействия с БД
+            </summary>
+        </member>
+        <member name="T:apitest.Services.AccountService">
+            <summary>
+            Сервис для работы со счетами
+            </summary>
+        </member>
+    </members>
+</doc>
