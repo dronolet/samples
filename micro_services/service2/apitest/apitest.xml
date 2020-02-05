@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>service2</name>
+    </assembly>
+    <members>
+        <member name="T:apitest.Classes.MapHelper">
+            <summary>
+            AutoMapper моделей
+            </summary>
+        </member>
+        <member name="M:apitest.Controllers.accountController.GetCompanyList(apitest.Interfaces.IResultStatus)">
+            <summary>
+            Список компаний
+            </summary>   
+            <response code="500">в случае внутренних ошибок(например проблемы с доступом к серверу БД и т.п.)</response> 
+        </member>
+        <member name="M:apitest.Controllers.accountController.AddCompany(apitest.Models.CompanyDataModel,apitest.Interfaces.IResultStatus)">
+            <summary>
+            Добавление компании
+            </summary>   
+            <response code="200">если операция успешна или произошла ошибка в бизнес-логике(например баланс может стать отрицательным, тогда status =”error”)</response>   
+            <response code="404">если сущность не найдена</response>     
+            <response code="500">в случае внутренних ошибок</response>  
+        </member>
+        <member name="M:apitest.Controllers.accountController.UpdateCompany(apitest.Models.UpadateCompanyDataModel,apitest.Interfaces.IResultStatus)">
+            <summary>
+            Изменение компании
+            </summary>   
+            <response code="200">если операция успешна или произошла ошибка в бизнес-логике(например баланс может стать отрицательным, тогда status =”error”)</response>   
+            <response code="404">если сущность не найдена</response>     
+            <response code="500">в случае внутренних ошибок</response>  
+        </member>
+        <member name="M:apitest.Controllers.accountController.DeleteCompany(System.Int32,apitest.Interfaces.IResultStatus)">
+            <summary>
+            Удаление компании
+            </summary>   
+            <response code="200">если операция успешна или произошла ошибка в бизнес-логике(например баланс может стать отрицательным, тогда status =”error”)</response>   
+            <response code="404">если сущность не найдена</response>     
+            <response code="500">в случае внутренних ошибок</response>  
+        </member>
+        <member name="T:apitest.Modules.DBCommonContext">
+            <summary>
+            Контекст взаимодействия с БД
+            </summary>
+        </member>
+        <member name="T:apitest.Services.CompanyService">
+            <summary>
+            Сервис для работы со счетами
+            </summary>
+        </member>
+    </members>
+</doc>
