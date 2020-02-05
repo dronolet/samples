@@ -1,0 +1,14 @@
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\bin\Debug\netcoreapp2.2\service1.deps.json
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\bin\Debug\netcoreapp2.2\service1.runtimeconfig.json
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\bin\Debug\netcoreapp2.2\service1.runtimeconfig.dev.json
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\bin\Debug\netcoreapp2.2\service1.dll
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\bin\Debug\netcoreapp2.2\service1.pdb
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\bin\Debug\netcoreapp2.2\service1.xml
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\obj\Debug\netcoreapp2.2\service1.csproj.CoreCompileInputs.cache
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\obj\Debug\netcoreapp2.2\service1.RazorAssemblyInfo.cache
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\obj\Debug\netcoreapp2.2\service1.RazorAssemblyInfo.cs
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\obj\Debug\netcoreapp2.2\service1.AssemblyInfoInputs.cache
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\obj\Debug\netcoreapp2.2\service1.AssemblyInfo.cs
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\obj\Debug\netcoreapp2.2\service1.RazorTargetAssemblyInfo.cache
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\obj\Debug\netcoreapp2.2\service1.dll
+D:\projects\ASP\VS2017\test\apitest\services\service1\apitest\obj\Debug\netcoreapp2.2\service1.pdb
